@@ -160,6 +160,51 @@ public class BigInt {
         return this.compare(y);
     }
 
+    public void SetSum( BigInt a, BigInt b){
+
+        A=new int[100000];
+        b.reverse();
+        a.reverse();
+
+        int max=b.A.length;
+        int min=a.A.length;
+        if(min>b.A.length){
+            min=b.A.length;
+            max=a.A.length;
+        }
+
+
+        if (a.sign==b.sign){
+            int q=0;
+            for (int i=0; i<min; i++){
+                this.A[i]+=a.A[i]+b.A[i]+q;
+                q=0;
+                if (this.A[i]>9){
+                    q=this.A[i]/10;
+                    this.A[i]%=10;
+                }
+            }
+            this.cA=max;
+            int t=0;
+            while (q>0){
+                this.A[min+t]+=q;
+                if (this.A[min+t]>9){
+                    q=this.A[min+t]/10;
+                    this.A[min+t]%=10;
+                }
+                t++;
+                if(min+t+1>max){
+                    this.cA++;
+                }
+            }
+        }
+        else{
+
+        }
+
+        this.reverse();
+
+    }
     
 
 
