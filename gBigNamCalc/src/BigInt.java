@@ -107,6 +107,7 @@ public class BigInt {
     }
 
     public int compare(BigInt x){
+        this.reverse();
         if(this.sign==x.sign){
             if(this.sign=='+'){
                 if(this.A.length>x.A.length){
@@ -152,6 +153,7 @@ public class BigInt {
                 return 1;
             }
         }
+
         return 0;
     }
 
@@ -233,33 +235,47 @@ public class BigInt {
             if(a.sign=='+'){
                 int z=0;
                 int q=0;
+                int c=0;
                 if (a.compare(b)>=0){
                     for (int i=0; i<max; i++){
-                        z=a.A[i]-b.A[i]+q;
+                        z=D[i]-E[i]+q;
                         if (z>=0){
                             this.A[i]=z;
                             q=0;
+                            if (z==0){
+                                c++;
+                            }
+                            else{
+                                c=0;
+                            }
                         }
                         else {
                             this.A[i]=z+10;
                             q--;
                         }
-
-
                     }
+                    this.cA=max-c;
                 }
                 else{
                     for (int i=0; i<max; i++){
-                        z=b.A[i]-a.A[i]+q;
+                        z=E[i]-D[i]+q;
+                        q=0;
                         if (z>=0){
                             this.A[i]=z;
-                            q=0;
+                            if (z==0){
+                                c++;
+                            }
+                            else{
+                                c=0;
+                            }
                         }
                         else {
                             this.A[i]=z+10;
                             q--;
                         }
                     }
+                    this.cA=max-c;
+                    this.A[cA-1]=-this.A[cA-1];
                 }
 
             }
