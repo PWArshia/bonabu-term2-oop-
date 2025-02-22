@@ -12,49 +12,11 @@ public class BigInt {
     }
 
     public BigInt(String s){
-        s=checker(s);
-        A=new int [s.length()];
-        cA=0;
-        if (s.charAt(0)=='+' || s.charAt(0)=='-') {
-            sign=s.charAt(0);
-            for (int i=1; i<s.length(); i++) {
-                A[i-1]=s.charAt(i)-'0';
-                cA=i;
-            }
-            if (sign=='-') {
-                A[0]=-A[0];
-            }
-        }
-        else{
-            sign='+';
-            for (int i=0; i<s.length(); i++) {
-                A[i]=s.charAt(i)-'0';
-                cA=i;
-            }
-        }
+      Set(s);
     }
 
     public BigInt(long x){
-        String s = Long.toString(x);
-        A=new int [s.length()];
-        cA=0;
-        if (s.charAt(0)=='+' || s.charAt(0)=='-') {
-            sign=s.charAt(0);
-            for (int i=1; i<s.length(); i++) {
-                A[i-1]=s.charAt(i)-'0';
-                cA=i;
-            }
-            if (sign=='-') {
-                A[0]=-A[0];
-            }
-        }
-        else{
-            sign='+';
-            for (int i=0; i<s.length(); i++) {
-                A[i]=s.charAt(i)-'0';
-                cA=i;
-            }
-        }
+        Set(x);
     }
 
 
@@ -68,7 +30,7 @@ public class BigInt {
             sign=s.charAt(0);
             for (int i=1; i<s.length(); i++) {
                 A[i-1]=s.charAt(i)-'0';
-                cA=i;
+                cA=i+1;
             }
             if (sign=='-') {
                 A[0]=-A[0];
@@ -78,7 +40,7 @@ public class BigInt {
             sign='+';
             for (int i=0; i<s.length(); i++) {
                 A[i]=s.charAt(i)-'0';
-                cA=i;
+                cA=i+1;
             }
         }
     }
@@ -107,11 +69,13 @@ public class BigInt {
         return s;
     }
 
-    public int length(){
-        return this.cA+1;
-    }
+
 
     //   --------------------------------------> FUNCTIONS
+
+    public int length(){
+        return this.cA;
+    }
 
     private String checker( String s1){
 
@@ -132,9 +96,14 @@ public class BigInt {
     }
 
     private void reverse(){
-
-
-
+        int B[]=new int[this.length()];
+        int z=this.length();
+        for (int i=0; i<this.length(); i++) {
+            B[this.length()-1-i]=this.A[i];
+        }
+        for (int i=0; i<this.length(); i++) {
+            this.A[i]=B[i];
+        }
     }
 
     public int compare(BigInt x){
@@ -191,37 +160,7 @@ public class BigInt {
         return this.compare(y);
     }
 
-
-
-    public void SetSum( BigInt b){
-
-        int min=this.A.length;
-        if(min>b.A.length){
-            min=b.A.length;
-        }
-
-
-        if (this.sign==b.sign){
-            if (this.sign=='+'){
-                int q=0;
-                for (int i=0; i<min; i++){
-                    this.A[i]+=b.A[i]+q;
-                    q=0;
-                    if (this.A[i]>9){
-                        this.A[i]-=10;
-                        q++;
-                    }
-                }
-            }
-            else{
-                int q=0;
-            }
-
-
-
-
-        }
-    }
+    
 
 
 
