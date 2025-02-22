@@ -205,8 +205,71 @@ public class BigInt {
         this.reverse();
 
     }
-    
+
+
+    public void SetMinus(BigInt a, BigInt b){
+        b.reverse();
+        a.reverse();
+
+        int max=b.A.length;
+        if(max<a.A.length){
+            max=a.A.length;
+        }
+
+
+        int D[]=new int[100000];
+        int E[]=new int[100000];
+
+        for (int i=0; i<a.length(); i++) {
+            D[i]=a.A[i];
+        }
+        for (int i=0; i<b.length(); i++) {
+            E[i]=b.A[i];
+        }
 
 
 
+        if(a.sign==b.sign){
+            if(a.sign=='+'){
+                int z=0;
+                int q=0;
+                if (a.compare(b)>=0){
+                    for (int i=0; i<max; i++){
+                        z=a.A[i]-b.A[i]+q;
+                        if (z>=0){
+                            this.A[i]=z;
+                            q=0;
+                        }
+                        else {
+                            this.A[i]=z+10;
+                            q--;
+                        }
+
+
+                    }
+                }
+                else{
+                    for (int i=0; i<max; i++){
+                        z=b.A[i]-a.A[i]+q;
+                        if (z>=0){
+                            this.A[i]=z;
+                            q=0;
+                        }
+                        else {
+                            this.A[i]=z+10;
+                            q--;
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+
+
+
+
+        this.reverse();
+    }
 }// end of class
