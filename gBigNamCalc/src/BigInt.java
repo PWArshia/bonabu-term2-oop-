@@ -30,7 +30,7 @@ public class BigInt {
             sign=s.charAt(0);
             for (int i=1; i<s.length(); i++) {
                 A[i-1]=s.charAt(i)-'0';
-                cA=i+1;
+                cA=i;
             }
             if (sign=='-') {
                 A[0]=-A[0];
@@ -230,7 +230,6 @@ public class BigInt {
         }
 
 
-
         if(a.sign==b.sign){
             if(a.sign=='+'){
                 int z=0;
@@ -282,9 +281,20 @@ public class BigInt {
 
         }
 
-
-
-
+        if (a.sign != b.sign){
+            if(b.sign=='+'){
+                b.sign='-';
+                b.A[0]=-b.A[0];
+                this.SetSum(a,b);
+                this.sign='-';
+            }
+            else{
+                b.sign='+';
+                b.A[0]=-b.A[0];
+                this.SetSum(a,b);
+                this.sign='+';
+            }
+        }
 
         this.reverse();
     }
