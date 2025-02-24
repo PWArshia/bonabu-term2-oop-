@@ -167,7 +167,7 @@ public class BigInt {
 
     public void SetSum( BigInt a, BigInt b){
 
-        A=new int[100000];
+
         b.reverse();
         a.reverse();
 
@@ -175,9 +175,11 @@ public class BigInt {
 
         if (a.sign==b.sign){
 
+            A=new int[100000];
+
             int max=b.A.length;
             int min=a.A.length;
-            if(min>b.A.length){
+            if(max<a.A.length){
                 min=b.A.length;
                 max=a.A.length;
             }
@@ -193,10 +195,10 @@ public class BigInt {
                 E[i]=b.A[i];
             }
 
-            
+
             int q=0;
-            for (int i=0; i<min; i++){
-                this.A[i]+=a.A[i]+b.A[i]+q;
+            for (int i=0; i<max; i++){
+                this.A[i]+=D[i]+E[i]+q;
                 q=0;
                 if (this.A[i]>9){
                     q=this.A[i]/10;
@@ -204,17 +206,9 @@ public class BigInt {
                 }
             }
             this.cA=max;
-            int t=0;
             while (q>0){
-                this.A[min+t]+=q;
-                if (this.A[min+t]>9){
-                    q=this.A[min+t]/10;
-                    this.A[min+t]%=10;
-                }
-                t++;
-                if(min+t+1>max){
-                    this.cA++;
-                }
+               this.A[max]+=q;
+               q/=10;
             }
             this.reverse();
         }

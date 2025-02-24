@@ -4,9 +4,9 @@ public class Main {
     public static void main(String[] args) {
         BigInt A = new BigInt(144);
         System.out.println(A.length());
-        BigInt B = new BigInt(1);
+        BigInt B = new BigInt(111111);
         BigInt C = new BigInt();
-        C.SetMinus(A,B);
+        C.SetSum(A,B);
         for (int x=0; x< C.length();x++){
             System.out.print(C.Get()[x]);
         }
