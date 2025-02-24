@@ -175,8 +175,6 @@ public class BigInt {
 
         if (a.sign==b.sign){
 
-            A=new int[100000];
-
             int max=b.A.length;
             int min=a.A.length;
             if(max<a.A.length){
@@ -324,7 +322,65 @@ public class BigInt {
                 this.sign='+';
             }
         }
+    }
+
+    public void SetMultiple(BigInt a, BigInt b){
+
+        int D[]=new int[100000];
+        int E[]=new int[100000];
+
+        for (int i=0; i<a.length(); i++) {
+            D[i]=a.A[i];
+        }
+        for (int i=0; i<b.length(); i++) {
+            E[i]=b.A[i];
+        }
+
+
+        if(a.sign==b.sign){
+            int z = 0;
+            int q = 0;
+            for (int i=0; i<a.length(); i++) {
+
+                for (int j = 0; j < b.length(); j++) {
+                    z = D[j] * E[i] + this.A[i + j] + q;
+                    q = 0;
+                    if (z > 9) {
+                        this.A[i] = z % 10;
+                        q = z / 10;
+                    } else {
+                        this.A[i] = z;
+                    }
+                    this.cA = i + j;
+                }
+//                while (q > 0) {
+//                    z = this.A[this.cA];
+//                }
+
+            }
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     }
+
+
 }// end of class
