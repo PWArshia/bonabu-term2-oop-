@@ -24,7 +24,7 @@ public class BigInt {
 
     public void Set(String s){
         s=checker(s);
-        A=new int [s.length()];
+        A=new int [s.length()-1];
         cA=0;
         if (s.charAt(0)=='+' || s.charAt(0)=='-') {
             sign=s.charAt(0);
@@ -82,6 +82,9 @@ public class BigInt {
         String s2="";
 
         if (s1.charAt(0)=='+' || s1.charAt(0)=='-' || s1.charAt(0)>='0' || s1.charAt(0)<='9') {
+            if (s1.charAt(0)!='+' && s1.charAt(0)!='-'){
+                s2+='+';
+            }
             s2+=s1.charAt(0);
             for (int i=1; i<s1.length(); i++) {
                 s2+=s1.charAt(i);
@@ -168,15 +171,29 @@ public class BigInt {
         b.reverse();
         a.reverse();
 
-        int max=b.A.length;
-        int min=a.A.length;
-        if(min>b.A.length){
-            min=b.A.length;
-            max=a.A.length;
-        }
 
 
         if (a.sign==b.sign){
+
+            int max=b.A.length;
+            int min=a.A.length;
+            if(min>b.A.length){
+                min=b.A.length;
+                max=a.A.length;
+            }
+
+
+            int D[]=new int[100000];
+            int E[]=new int[100000];
+
+            for (int i=0; i<a.length(); i++) {
+                D[i]=a.A[i];
+            }
+            for (int i=0; i<b.length(); i++) {
+                E[i]=b.A[i];
+            }
+
+            
             int q=0;
             for (int i=0; i<min; i++){
                 this.A[i]+=a.A[i]+b.A[i]+q;
@@ -199,12 +216,26 @@ public class BigInt {
                     this.cA++;
                 }
             }
+            this.reverse();
         }
         else{
-
+            if(b.sign=='+'){
+                b.sign='-';
+                b.A[0]=-b.A[0];
+                this.SetMinus(a,b);
+                this.sign='-';
+            }
+            else{
+                b.sign='+';
+                b.A[b.cA-1]=-b.A[b.cA-1];
+                a.reverse();
+                b.reverse();
+                this.SetMinus(a,b);
+                this.sign='+';
+            }
         }
 
-        this.reverse();
+
 
     }
 
@@ -213,24 +244,26 @@ public class BigInt {
         b.reverse();
         a.reverse();
 
-        int max=b.A.length;
-        if(max<a.A.length){
-            max=a.A.length;
-        }
-
-
-        int D[]=new int[100000];
-        int E[]=new int[100000];
-
-        for (int i=0; i<a.length(); i++) {
-            D[i]=a.A[i];
-        }
-        for (int i=0; i<b.length(); i++) {
-            E[i]=b.A[i];
-        }
-
 
         if(a.sign==b.sign){
+
+            int max=b.A.length;
+            if(max<a.A.length){
+                max=a.A.length;
+            }
+
+
+            int D[]=new int[100000];
+            int E[]=new int[100000];
+
+            for (int i=0; i<a.length(); i++) {
+                D[i]=a.A[i];
+            }
+            for (int i=0; i<b.length(); i++) {
+                E[i]=b.A[i];
+            }
+
+
             if(a.sign=='+'){
                 int z=0;
                 int q=0;
@@ -278,7 +311,7 @@ public class BigInt {
                 }
 
             }
-
+            this.reverse();
         }
 
         if (a.sign != b.sign){
@@ -290,12 +323,14 @@ public class BigInt {
             }
             else{
                 b.sign='+';
-                b.A[0]=-b.A[0];
+                b.A[b.cA-1]=-b.A[b.cA-1];
+                a.reverse();
+                b.reverse();
                 this.SetSum(a,b);
                 this.sign='+';
             }
         }
 
-        this.reverse();
+
     }
 }// end of class
