@@ -2,9 +2,9 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        BigInt A = new BigInt(99);
+        BigInt A = new BigInt(-2);
         System.out.println(A.length());
-        BigInt B = new BigInt(2);
+        BigInt B = new BigInt(100);
         BigInt C = new BigInt();
         C.SetMultiple(A,B);
         for (int x=0; x< C.length();x++){

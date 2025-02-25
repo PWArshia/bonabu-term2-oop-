@@ -326,52 +326,64 @@ public class BigInt {
 
     public void SetMultiple(BigInt a, BigInt b){
 
-        int D[]=new int[100000];
-        int E[]=new int[100000];
+        if (a.sign==b.sign){
 
-        for (int i=0; i<a.length(); i++) {
-            D[i]=a.A[i];
-        }
-        for (int i=0; i<b.length(); i++) {
-            E[i]=b.A[i];
-        }
+            a.reverse();
+            b.reverse();
 
+            int D[]=new int[100000];
+            int E[]=new int[100000];
 
-        if(a.sign==b.sign){
-            int z = 0;
-            int q = 0;
             for (int i=0; i<a.length(); i++) {
-
-                for (int j = 0; j < b.length(); j++) {
-                    z = D[j] * E[i] + this.A[i + j] + q;
-                    q = 0;
-                    if (z > 9) {
-                        this.A[i] = z % 10;
-                        q = z / 10;
-                    } else {
-                        this.A[i] = z;
-                    }
-                    this.cA = i + j;
-                }
-//                while (q > 0) {
-//                    z = this.A[this.cA];
-//                }
-
+                D[i]=a.A[i];
+            }
+            for (int i=0; i<b.length(); i++) {
+                E[i]=b.A[i];
             }
 
+            int z=0;
+            int q=0;
+            for (int i=0 ; i<b.length(); i++){
+                for (int j=0; j<a.length(); j++){
+                    z=D[j]*E[i]+this.A[i+j]+q;
+                    q=0;
+                    if (z>9){
+                        this.A[i+j]=z%10;
+                        q=z/10;
+                    }
+                    else{
+                        this.A[i+j]=z;
+                    }
+                    this.cA=i+j+1;
+                }
 
-
-
-
-
+            }
+            if(q>0){
+                this.A[cA]=q;
+                q=0;
+                cA++;
+            }
+            this.reverse();
 
         }
 
+        else{
+            if(a.sign=='-'){
+                a.sign='+';
+                a.A[0]=-a.A[0];
+                this.SetMultiple(a,b);
+                this.sign='-';
+                this.A[0]=-this.A[0];
+            }
+            else{
+                b.sign='+';
+                b.A[0]=-b.A[0];
+                this.SetMultiple(a,b);
+                this.sign='-';
+                this.A[0]=-this.A[0];
+            }
 
-
-
-
-
+        }
 
 
 
