@@ -114,49 +114,62 @@ public class BigInt {
         if(this.sign==x.sign){
             if(this.sign=='+'){
                 if(this.A.length>x.A.length){
+                    this.reverse();
                     return 1;
                 }
                 else if (this.A.length<x.A.length){
+                    this.reverse();
                     return -1;
                 }
                 else {
                     for(int i=0; i<this.A.length; i++){
                         if(this.A[i]>x.A[i]){
+                            this.reverse();
                             return 1;
                         }
                         else if(this.A[i]<x.A[i]){
+                            this.reverse();
                             return -1;
                         }
                     }
+                    this.reverse();
                     return 0;
                 }
             }
             else {
                 if (this.A.length > x.A.length) {
+                    this.reverse();
                     return -1;
-                } else if (this.A.length < x.A.length) {
+                }
+                else if (this.A.length < x.A.length) {
+                    this.reverse();
                     return +1;
                 } else {
                     for (int i = 0; i < this.A.length; i++) {
                         if (this.A[i] > x.A[i]) {
+                            this.reverse();
                             return 1;
                         } else if (this.A[i] < x.A[i]) {
+                            this.reverse();
                             return -1;
                         }
                     }
+                    this.reverse();
                     return 0;
                 }
             }
         }
         else{
             if(this.sign=='-'){
+                this.reverse();
                 return -1;
             }
             else if(this.sign=='+'){
+                this.reverse();
                 return 1;
             }
         }
-
+        this.reverse();
         return 0;
     }
 
@@ -384,10 +397,34 @@ public class BigInt {
             }
 
         }
+    }
 
+    public void SetDiv(BigInt a, BigInt b){
 
+        if (a.sign==b.sign){
 
+            BigInt E=new BigInt();
+            E.A[0]=a.A[0];
+            this.cA=0;
+            while(a.compare(b)>=0){
+                int z=0;
+                while(E.compare(b)<0){
+                    E.A[z]=a.A[z];
+                    z++;
+                }
+                int t=0;
+                while(E.compare(b)>=0){
+                    E.SetMinus(E,b);
+                    t++;
+                }
+                this.A[this.cA]=t;
+                this.cA++;
+                BigInt C=new BigInt(t);
+                C.SetMultiple(C,b);
+                a.SetMinus(a,C);
+            }
 
+        }
 
 
 
