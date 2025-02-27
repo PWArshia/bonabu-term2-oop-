@@ -5,7 +5,7 @@ public class Main {
         BigInt A = new BigInt(2);
         BigInt B = new BigInt(5);
         BigInt C = new BigInt(0);
-        C.SetPow(A,100);
+        C.SetFact(A);
         for (int x=0; x<C.length(); x++) {
             System.out.print(C.Get()[x]);
         }

@@ -504,5 +504,16 @@ public class BigInt {
         }
     }
 
+    public void SetFact(BigInt a){
+        this.Set(a);
+        BigInt B=new BigInt(1);
+        BigInt C=new BigInt(a);
+        C.SetMinus(C,B);
+        while(a.compare(0)>0){
+            this.SetMultiple(this,C);
+            C.SetMinus(C,B);
+        }
+    }
+
 
 }// end of class
