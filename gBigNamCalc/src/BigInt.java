@@ -480,5 +480,11 @@ public class BigInt {
         return a;
     }
 
+    public void SetMode(BigInt a, BigInt b){
+        this.Set(SetDiv(a,b));
+
+
+    }
+
 
 }// end of class
