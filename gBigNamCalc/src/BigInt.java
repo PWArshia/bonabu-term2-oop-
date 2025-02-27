@@ -8,7 +8,8 @@ public class BigInt {
 
     public BigInt() {
         A= new int[100000];
-        cA=0;
+        this.sign = '+';
+        this.cA=0;
     }
 
     public BigInt(String s){
@@ -27,7 +28,7 @@ public class BigInt {
         A=new int [s.length()-1];
         cA=0;
         if (s.charAt(0)=='+' || s.charAt(0)=='-') {
-            sign=s.charAt(0);
+            this.sign=s.charAt(0);
             for (int i=1; i<s.length(); i++) {
                 A[i-1]=s.charAt(i)-'0';
                 cA=i;
@@ -37,7 +38,7 @@ public class BigInt {
             }
         }
         else{
-            sign='+';
+            this.sign='+';
             for (int i=0; i<s.length(); i++) {
                 A[i]=s.charAt(i)-'0';
                 cA=i+1;
@@ -46,7 +47,7 @@ public class BigInt {
     }
 
     public void Set(BigInt x){
-        A=x.A;
+        this.A=x.A;
     }
 
     public void Set(long x){
@@ -113,16 +114,16 @@ public class BigInt {
         this.reverse();
         if(this.sign==x.sign){
             if(this.sign=='+'){
-                if(this.A.length>x.A.length){
+                if(this.length()>x.length()){
                     this.reverse();
                     return 1;
                 }
-                else if (this.A.length<x.A.length){
+                else if (this.length()<x.length()){
                     this.reverse();
                     return -1;
                 }
                 else {
-                    for(int i=0; i<this.A.length; i++){
+                    for(int i=0; i<this.length(); i++){
                         if(this.A[i]>x.A[i]){
                             this.reverse();
                             return 1;
@@ -137,15 +138,15 @@ public class BigInt {
                 }
             }
             else {
-                if (this.A.length > x.A.length) {
+                if (this.length() > x.length()) {
                     this.reverse();
                     return -1;
                 }
-                else if (this.A.length < x.A.length) {
+                else if (this.length() < x.length()) {
                     this.reverse();
                     return +1;
                 } else {
-                    for (int i = 0; i < this.A.length; i++) {
+                    for (int i = 0; i < this.length(); i++) {
                         if (this.A[i] > x.A[i]) {
                             this.reverse();
                             return 1;
@@ -252,9 +253,9 @@ public class BigInt {
 
         if(a.sign==b.sign){
 
-            int max=b.A.length;
-            if(max<a.A.length){
-                max=a.A.length;
+            int max=b.length();
+            if(max<a.length()){
+                max=a.length();
             }
 
 
@@ -399,36 +400,84 @@ public class BigInt {
         }
     }
 
-    public void SetDiv(BigInt a, BigInt b){
-
-        if (a.sign==b.sign){
-
-            BigInt E=new BigInt();
-            E.A[0]=a.A[0];
-            this.cA=0;
-            while(a.compare(b)>=0){
-                int z=0;
-                while(E.compare(b)<0){
-                    E.A[z]=a.A[z];
-                    z++;
-                }
-                int t=0;
-                while(E.compare(b)>=0){
-                    E.SetMinus(E,b);
-                    t++;
-                }
-                this.A[this.cA]=t;
-                this.cA++;
-                BigInt C=new BigInt(t);
-                C.SetMultiple(C,b);
-                a.SetMinus(a,C);
-            }
-
+    public BigInt SetDiv(BigInt a, BigInt b){
+        if (a.compare(0)==0){
+            this.cA=1;
         }
+        else if(a.compare(b)==-1 && a.sign==b.sign && a.sign=='+'){
+            this.cA=1;
+        }
+        else if(a.compare(b)==0){
+            this.cA=1;
+            this.A[0]=1;
+        }
+        else if (b.compare(0)==0){
+            this.cA=2;
+        }
+        else{
+            if (a.sign==b.sign){
+                while(a.compare(b)>=0){
+                    BigInt C=new BigInt();
 
+                    int l=0;
+                    int t=0;
+                    C.cA=0;
+                    while(C.compare(b)<0){
+                        C.A[C.cA]=a.A[C.cA];
+                        C.cA++;
+                        l=C.cA;
+                    }
+                    while(C.compare(b)>=0){
+                        C.SetMinus(C,b);
+                        t++;
+                    }
+                    this.A[cA]=t;
+                    cA++;
 
+                    BigInt h=new BigInt();
+                    if (a.cA-l==0){
+                        h.Set(t);
+                    }
+                    else {
+                        int pow=1;
+                        for (int i=1; i<=a.cA-l; i++){
+                            pow*=10;
+                        }
+                        h.Set(t*pow);
+                    }
+                    C.SetMultiple(b,h);
+                    int r=a.cA;
+                    a.SetMinus(a,C);
 
+                    if (a.compare(b)<0){
+                        int j=r-l;
+                        while(j>0){
+                            this.cA++;
+                            j--;
+                        }
 
+                    }
+                }
+                return a;
+            }
+            else {
+                if (b.sign=='-'){
+                    b.sign='+';
+                    b.A[0]=-b.A[0];
+                    this.SetDiv(a,b);
+                    this.sign='-';
+                    this.A[0]=-this.A[0];
+                }
+                else{
+                    a.sign='+';
+                    a.A[0]=-a.A[0];
+                    this.SetDiv(a,b);
+                    this.sign='+';
+                    this.A[0]=-this.A[0];
+                }
+            }
+        }
+        return a;
     }
 
 
