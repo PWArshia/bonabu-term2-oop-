@@ -51,9 +51,11 @@ public class BigInt {
     }
 
     public void Set(BigInt x){
-        this.A=x.A;
-        this.cA=x.cA;
-        this.sign=x.sign;
+        String s="";
+        for (int i=0; i<x.length(); i++) {
+            s+=x.A[i];
+        }
+        Set(s);
     }
 
     public void Set(long x){
@@ -504,14 +506,13 @@ public class BigInt {
         }
     }
 
-    public void SetFact(BigInt a){
-        this.Set(a);
+    public void SetFact(BigInt A){
+        this.Set(A);
         BigInt B=new BigInt(1);
-        BigInt C=new BigInt(a);
-        C.SetMinus(C,B);
-        while(a.compare(0)>0){
-            this.SetMultiple(this,C);
-            C.SetMinus(C,B);
+        A.SetMinus(A,B);
+        while (A.compare(0)>0){
+            this.SetMultiple(this,A);
+            A.SetMinus(A,B);
         }
     }
 
