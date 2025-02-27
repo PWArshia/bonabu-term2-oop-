@@ -20,12 +20,16 @@ public class BigInt {
         Set(x);
     }
 
+    public BigInt(BigInt a){
+        Set(a);
+    }
+
 
     //   --------------------------------------> SETTERS
 
     public void Set(String s){
         s=checker(s);
-        A=new int [s.length()-1];
+        A=new int [100000];
         cA=0;
         if (s.charAt(0)=='+' || s.charAt(0)=='-') {
             this.sign=s.charAt(0);
@@ -48,6 +52,8 @@ public class BigInt {
 
     public void Set(BigInt x){
         this.A=x.A;
+        this.cA=x.cA;
+        this.sign=x.sign;
     }
 
     public void Set(long x){
@@ -347,6 +353,8 @@ public class BigInt {
 
             int D[]=new int[100000];
             int E[]=new int[100000];
+            int F[]=new int[100000];
+            int cF=0;
 
             for (int i=0; i<a.length(); i++) {
                 D[i]=a.A[i];
@@ -355,30 +363,35 @@ public class BigInt {
                 E[i]=b.A[i];
             }
 
+
             int z=0;
             int q=0;
             for (int i=0 ; i<b.length(); i++){
                 for (int j=0; j<a.length(); j++){
-                    z=D[j]*E[i]+this.A[i+j]+q;
+                    z=D[j]*E[i]+F[i+j]+q;
                     q=0;
                     if (z>9){
-                        this.A[i+j]=z%10;
+                        F[i+j]=z%10;
                         q=z/10;
                     }
                     else{
-                        this.A[i+j]=z;
+                        F[i+j]=z;
                     }
-                    this.cA=i+j+1;
+                    cF=i+j+1;
                 }
 
             }
             if(q>0){
-                this.A[cA]=q;
+                F[cF]=q;
                 q=0;
-                cA++;
+                cF++;
             }
+            this.Set(0);
+            for (int i=0 ; i<cF; i++){
+                this.A[i]=F[i];
+            }
+            this.cA=cF;
             this.reverse();
-
         }
 
         else{
@@ -482,8 +495,13 @@ public class BigInt {
 
     public void SetMode(BigInt a, BigInt b){
         this.Set(SetDiv(a,b));
+    }
 
-
+    public void SetPow(BigInt a, int b){
+        this.Set(a);
+        for (int i=1; i<b; i++){
+            this.SetMultiple(this,a);
+        }
     }
 
 
