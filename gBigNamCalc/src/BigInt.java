@@ -269,6 +269,8 @@ public class BigInt {
 
             int D[]=new int[100000];
             int E[]=new int[100000];
+            int F[]=new int[100000];
+            int cF=0;
 
             for (int i=0; i<a.length(); i++) {
                 D[i]=a.A[i];
@@ -277,6 +279,8 @@ public class BigInt {
                 E[i]=b.A[i];
             }
 
+            b.reverse();
+            a.reverse();
 
             if(a.sign=='+'){
                 int z=0;
@@ -286,7 +290,7 @@ public class BigInt {
                     for (int i=0; i<max; i++){
                         z=D[i]-E[i]+q;
                         if (z>=0){
-                            this.A[i]=z;
+                            F[i]=z;
                             q=0;
                             if (z==0){
                                 c++;
@@ -296,18 +300,18 @@ public class BigInt {
                             }
                         }
                         else {
-                            this.A[i]=z+10;
+                            F[i]=z+10;
                             q--;
                         }
                     }
-                    this.cA=max-c;
+                    cF=max-c;
                 }
                 else{
                     for (int i=0; i<max; i++){
                         z=E[i]-D[i]+q;
                         q=0;
                         if (z>=0){
-                            this.A[i]=z;
+                            F[i]=z;
                             if (z==0){
                                 c++;
                             }
@@ -316,15 +320,22 @@ public class BigInt {
                             }
                         }
                         else {
-                            this.A[i]=z+10;
+                            F[i]=z+10;
                             q--;
                         }
                     }
-                    this.cA=max-c;
-                    this.A[cA-1]=-this.A[cA-1];
+                    cF=max-c;
+                    F[cA-1]=-F[cA-1];
                 }
 
             }
+
+            this.Set(0);
+            for (int i=0; i<cF; i++){
+                this.A[i]=F[i];
+            }
+            this.cA=cF;
+
             this.reverse();
         }
 
@@ -365,6 +376,8 @@ public class BigInt {
                 E[i]=b.A[i];
             }
 
+            a.reverse();
+            b.reverse();
 
             int z=0;
             int q=0;
