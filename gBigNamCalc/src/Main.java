@@ -2,10 +2,10 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        BigInt A = new BigInt("0");
-        BigInt B = new BigInt("1234");
-        BigInt C = new BigInt(0);
-        C.SetMultiple(A,B);
+        BigInt A = new BigInt("16");
+        BigInt B = new BigInt("13");
+        BigInt C = new BigInt();
+        C.SetFact(A);
         System.out.println(C.length());
         for (int x=0; x<C.length(); x++) {
             System.out.print(C.Get()[x]);

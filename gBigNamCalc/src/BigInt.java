@@ -190,62 +190,89 @@ public class BigInt {
     public void SetSum( BigInt a, BigInt b){
 
 
-        b.reverse();
-        a.reverse();
+
 
 
 
         if (a.sign==b.sign){
+            if (a.sign=='+'){
+                b.reverse();
+                a.reverse();
 
-            int max=b.A.length;
-            int min=a.A.length;
-            if(max<a.A.length){
-                min=b.A.length;
-                max=a.A.length;
-            }
-
-
-            int D[]=new int[100000];
-            int E[]=new int[100000];
-
-            for (int i=0; i<a.length(); i++) {
-                D[i]=a.A[i];
-            }
-            for (int i=0; i<b.length(); i++) {
-                E[i]=b.A[i];
-            }
-
-
-            int q=0;
-            for (int i=0; i<max; i++){
-                this.A[i]+=D[i]+E[i]+q;
-                q=0;
-                if (this.A[i]>9){
-                    q=this.A[i]/10;
-                    this.A[i]%=10;
+                int max=b.length();
+                int min=a.length();
+                if(max<a.length()){
+                    min=b.length();
+                    max=a.length();
                 }
-            }
-            this.cA=max;
-            while (q>0){
-               this.A[max]+=q;
-               q/=10;
-            }
-            this.reverse();
-        }
-        else{
-            if(b.sign=='+'){
-                b.sign='-';
-                b.A[0]=-b.A[0];
-                this.SetMinus(a,b);
-                this.sign='-';
+
+
+                int D[]=new int[100000];
+                int E[]=new int[100000];
+                int F[]=new int[100000];
+                int cF=0;
+
+                for (int i=0; i<a.length(); i++) {
+                    D[i]=a.A[i];
+                }
+                for (int i=0; i<b.length(); i++) {
+                    E[i]=b.A[i];
+                }
+
+                b.reverse();
+                a.reverse();
+
+                int q=0;
+                for (int i=0; i<max; i++){
+                    F[i]+=D[i]+E[i]+q;
+                    q=0;
+                    if (F[i]>9){
+                        q=F[i]/10;
+                        F[i]%=10;
+                    }
+                }
+                cF=max;
+                while (q>0){
+                    F[max]+=q;
+                    q/=10;
+                    cF++;
+                }
+                this.cA=cF;
+                for (int i=0; i<cF; i++){
+                    this.A[i]=F[i];
+                }
+                this.reverse();
             }
             else{
+                a.sign='+';
                 b.sign='+';
-                b.A[b.cA-1]=-b.A[b.cA-1];
-                a.reverse();
-                b.reverse();
+                a.A[0]=-a.A[0];
+                b.A[0]=-b.A[0];
+                this.SetSum(a,b);
+                this.sign='-';
+                a.sign='-';
+                b.sign='-';
+                this.A[0]=-this.A[0];
+                a.A[0]=-a.A[0];
+                b.A[0]=-b.A[0];
+                this.sign='-';
+            }
+        }
+        else{
+            if (a.sign=='+'){
+                b.sign='+';
+                b.A[0]=-b.A[0];
                 this.SetMinus(a,b);
-                this.sign='+';
+                b.sign='-';
+                b.A[0]=-b.A[0];
+            }
+            else {
+                a.sign='+';
+                a.A[0]=-a.A[0];
+                this.SetMinus(a,b);
+                this.A[0]=-this.A[0];
+                a.sign='-';
+                a.A[0]=-a.A[0];
             }
         }
 
@@ -255,11 +282,12 @@ public class BigInt {
 
 
     public void SetMinus(BigInt a, BigInt b){
-        b.reverse();
-        a.reverse();
+
 
 
         if(a.sign==b.sign){
+            b.reverse();
+            a.reverse();
 
             int max=b.length();
             if(max<a.length()){
@@ -302,6 +330,7 @@ public class BigInt {
                         else {
                             F[i]=z+10;
                             q--;
+                            c=0;
                         }
                     }
                     cF=max-c;
@@ -325,7 +354,7 @@ public class BigInt {
                         }
                     }
                     cF=max-c;
-                    F[cA-1]=-F[cA-1];
+                    F[cF-1]=-F[cF-1];
                 }
 
             }
@@ -349,8 +378,6 @@ public class BigInt {
             else{
                 b.sign='+';
                 b.A[b.cA-1]=-b.A[b.cA-1];
-                a.reverse();
-                b.reverse();
                 this.SetSum(a,b);
                 this.sign='+';
             }
@@ -394,13 +421,14 @@ public class BigInt {
                     }
                     cF=i+j+1;
                 }
+                if(q>0){
+                    F[cF]=q;
+                    q=0;
+                    cF++;
+                }
 
             }
-            if(q>0){
-                F[cF]=q;
-                q=0;
-                cF++;
-            }
+
             this.Set(0);
             for (int i=0 ; i<cF; i++){
                 this.A[i]=F[i];
@@ -438,6 +466,7 @@ public class BigInt {
         else if(a.compare(b)==0){
             this.cA=1;
             this.A[0]=1;
+            a.Set(0);
         }
         else if (b.compare(0)==0){
             this.cA=2;
@@ -495,6 +524,8 @@ public class BigInt {
                     this.SetDiv(a,b);
                     this.sign='-';
                     this.A[0]=-this.A[0];
+                    b.sign='-';
+                    b.A[0]=-b.A[0];
                 }
                 else{
                     a.sign='+';
@@ -502,6 +533,8 @@ public class BigInt {
                     this.SetDiv(a,b);
                     this.sign='+';
                     this.A[0]=-this.A[0];
+                    a.sign='-';
+                    a.A[0]=-a.A[0];
                 }
             }
         }
@@ -531,3 +564,4 @@ public class BigInt {
 
 
 }// end of class
+
