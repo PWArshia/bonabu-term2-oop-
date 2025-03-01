@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="310.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bigcalc.HelloController">
+   <children>
+      <Button fx:id="btMod" layoutX="37.0" layoutY="146.0" mnemonicParsing="false" onAction="#pressMod" prefHeight="31.0" prefWidth="33.0" text="\%" />
+      <Button fx:id="btce" layoutX="108.0" layoutY="146.0" mnemonicParsing="false" onAction="#pressCE" prefHeight="31.0" prefWidth="33.0" text="CE" />
+      <Button fx:id="btc" layoutX="179.0" layoutY="146.0" mnemonicParsing="false" onAction="#pressC" prefHeight="31.0" prefWidth="33.0" text="C" />
+      <Button fx:id="btdel" layoutX="243.0" layoutY="146.0" mnemonicParsing="false" onAction="#pressDel" prefHeight="31.0" prefWidth="33.0" text="del" />
+      <Button fx:id="bt7" layoutX="37.0" layoutY="206.0" mnemonicParsing="false" onAction="#press7" prefHeight="31.0" prefWidth="33.0" text="7" />
+      <Button fx:id="bt8" layoutX="108.0" layoutY="206.0" mnemonicParsing="false" onAction="#press8" prefHeight="31.0" prefWidth="33.0" text="8" />
+      <Button fx:id="bt9" layoutX="180.0" layoutY="206.0" mnemonicParsing="false" onAction="#press9" prefHeight="31.0" prefWidth="33.0" text="9" />
+      <Button fx:id="btx" layoutX="243.0" layoutY="206.0" mnemonicParsing="false" onAction="#pressX" prefHeight="31.0" prefWidth="33.0" text="x" />
+      <Button fx:id="bt4" layoutX="37.0" layoutY="255.0" mnemonicParsing="false" onAction="#press4" prefHeight="31.0" prefWidth="33.0" text="4" />
+      <Button fx:id="bt5" layoutX="108.0" layoutY="255.0" mnemonicParsing="false" onAction="#press5" prefHeight="31.0" prefWidth="33.0" text="5" />
+      <Button fx:id="bt6" layoutX="180.0" layoutY="255.0" mnemonicParsing="false" onAction="#press6" prefHeight="31.0" prefWidth="33.0" text="6" />
+      <Button fx:id="btdiv" layoutX="243.0" layoutY="255.0" mnemonicParsing="false" onAction="#pressDiv" prefHeight="31.0" prefWidth="33.0" text="÷" />
+      <Button fx:id="bt1" layoutX="37.0" layoutY="307.0" mnemonicParsing="false" onAction="#press1" prefHeight="31.0" prefWidth="33.0" text="1" />
+      <Button fx:id="bt2" layoutX="108.0" layoutY="307.0" mnemonicParsing="false" onAction="#press2" prefHeight="31.0" prefWidth="33.0" text="2" />
+      <Button fx:id="bt3" layoutX="179.0" layoutY="307.0" mnemonicParsing="false" onAction="#press3" prefHeight="31.0" prefWidth="33.0" text="3" />
+      <Button fx:id="btfact" layoutX="243.0" layoutY="307.0" mnemonicParsing="false" onAction="#pressFact" prefHeight="31.0" prefWidth="33.0" text="!" />
+      <Button fx:id="btsum" layoutX="37.0" layoutY="360.0" mnemonicParsing="false" onAction="#pressSum" prefHeight="31.0" prefWidth="33.0" text="+" />
+      <Button fx:id="mtminus" layoutX="108.0" layoutY="360.0" mnemonicParsing="false" onAction="#pressMinus" prefHeight="31.0" prefWidth="33.0" text="-" />
+      <Button fx:id="btpow" layoutX="176.0" layoutY="360.0" mnemonicParsing="false" onAction="#pressPow" prefHeight="31.0" prefWidth="42.0" text="pow" />
+      <Button fx:id="bth" layoutX="243.0" layoutY="360.0" mnemonicParsing="false" onAction="#pressH" prefHeight="31.0" prefWidth="33.0" text="H" />
+      <TextArea fx:id="showMon" editable="false" layoutX="35.0" layoutY="6.0" prefHeight="127.0" prefWidth="240.0" wrapText="true" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="6.0" />
+      <Button fx:id="btnE" layoutX="92.0" layoutY="397.0" mnemonicParsing="false" onAction="#pressE" prefHeight="31.0" prefWidth="33.0" text="=" />
+      <Button fx:id="btn0" layoutX="164.0" layoutY="397.0" mnemonicParsing="false" onAction="#press0" prefHeight="31.0" prefWidth="33.0" text="0" />
+   </children>
+</AnchorPane>
