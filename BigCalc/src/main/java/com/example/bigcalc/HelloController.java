@@ -1,6 +1,7 @@
 package com.example.bigcalc;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -69,35 +70,53 @@ public class HelloController {
     }
     @FXML
     public void pressSum() {
-       if(s.charAt(s.length()-1)!='^' && s.charAt(s.length()-1)!='+' && s.charAt(s.length()-1)!='-'){
-        s+='+';
-        showMon.setText(s);
+       if (s.isEmpty()){
+           showMon.setText("error , enter a number");
+       }
+       else {
+           if( (s.charAt(s.length()-1)>='0' && s.charAt(s.length()-1)<='9') ||(s.charAt(s.length()-1)!='^' && s.charAt(s.length()-1)!='+' && s.charAt(s.length()-1)!='-') ){
+               s+='+';
+               showMon.setText(s);
+           }
        }
     }
     @FXML
     public void pressMinus() {
-        if(s.charAt(s.length()-1)!='^' && s.charAt(s.length()-1)!='+' && s.charAt(s.length()-1)!='-'){
-            s+='+';
-            showMon.setText(s);
+        if (s.isEmpty()){
+            showMon.setText("error , enter a number");
+        }
+        else {
+            if( (s.charAt(s.length()-1)>='0' && s.charAt(s.length()-1)<='9') ||(s.charAt(s.length()-1)!='^' && s.charAt(s.length()-1)!='+' && s.charAt(s.length()-1)!='-') ){
+                s+='-';
+                showMon.setText(s);
+            }
         }
     }
     @FXML
     public void pressX() {
-        if(s.charAt(s.length()-1)!='x'){
-            if(s.charAt(s.length()-1)=='+' || s.charAt(s.length()-1)=='-' || s.charAt(s.length()-1)>=0 || s.charAt(s.length()-1)<=9 || s.charAt(s.length()-1)=='x'){
+        if (s.isEmpty()){
+            showMon.setText("error , enter a number");
+        }
+        else {
+            if (s.charAt(s.length()-1)!='^' && s.charAt(s.length()-1)!='x' && s.charAt(s.length()-1)!='/' && s.charAt(s.length()-1)!='%' && s.charAt(s.length()-1)!='!' ){
                 s+='x';
                 showMon.setText(s);
             }
         }
+
     }
     @FXML
     public void pressDiv() {
-        if(s.charAt(s.length()-1)!='/'){
-            if(s.charAt(s.length()-1)=='+' || s.charAt(s.length()-1)=='-' || s.charAt(s.length()-1)>=0 || s.charAt(s.length()-1)<=9 || s.charAt(s.length()-1)=='/'){
+        if (s.isEmpty()){
+            showMon.setText("error , enter a number");
+        }
+        else {
+            if (s.charAt(s.length()-1)!='^' && s.charAt(s.length()-1)!='x' && s.charAt(s.length()-1)!='/' && s.charAt(s.length()-1)!='%' && s.charAt(s.length()-1)!='!' ){
                 s+='/';
                 showMon.setText(s);
             }
         }
+
     }
     @FXML
     public void pressC() {
@@ -106,18 +125,43 @@ public class HelloController {
     }
     @FXML
     public void pressPow() {
-        s+='^';
-        showMon.setText(s);
+        if (s.isEmpty()){
+            showMon.setText("error , enter a number");
+        }
+        else {
+            if ((s.charAt(s.length()-1)=='!') ||(s.charAt(s.length()-1)>='0' && s.charAt(s.length()-1)<='9')){
+                s+='^';
+                showMon.setText(s);
+            }
+        }
     }
     @FXML
     public void pressFact() {
-        s+='!';
-        showMon.setText(s);
+
+        if (s.isEmpty()){
+            showMon.setText("error , enter a number");
+        }
+        else{
+            if((s.charAt(s.length()-1)=='!')||(s.charAt(s.length()-1)>='0' && s.charAt(s.length()-1)<='9') ){
+                s+='!';
+                showMon.setText(s);
+            }
+        }
+
     }
     @FXML
     protected void pressMod() {
-        s+='%';
-        showMon.setText(s);
+
+        if (s.isEmpty()){
+            showMon.setText("error , enter a number");
+        }
+        else {
+            if (s.charAt(s.length()-1)!='^' && s.charAt(s.length()-1)!='x' && s.charAt(s.length()-1)!='/' && s.charAt(s.length()-1)!='%' && s.charAt(s.length()-1)!='!' ){
+                s+='%';
+                showMon.setText(s);
+            }
+        }
+
     }
     @FXML
     public void pressDel() {
@@ -129,11 +173,11 @@ public class HelloController {
         showMon.setText(s);
     }
     @FXML
-    public void pressH() {
-         File f1= new File("");// write file address for import n and matris
+    public void pressH() throws FileNotFoundException {
+         File f1= new File("/home/arshia/Desktop/asli2/data.txt");// write file address for import n and matris
         Scanner sc = new Scanner(f1);
 
-        
+
         while(sc.hasNext()){
             s=sc.nextLine();
             showMon.setText(s);
@@ -156,8 +200,8 @@ public class HelloController {
         showMon.setText(s);
     }
     @FXML
-    public void pressE() {
-        File f1= new File(""); //write file address here
+    public void pressE() throws FileNotFoundException {
+        File f1= new File("/home/arshia/Desktop/asli2/data.txt"); //write file address here
         PrintWriter outfill1= new PrintWriter(f1);
         String s2=s;
         olaviat a=new olaviat(s);
