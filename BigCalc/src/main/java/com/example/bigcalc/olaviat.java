@@ -33,6 +33,37 @@ public class olaviat {
 
         
         int h=0;
+
+        while (h<s.length() && s.indexOf('(')!=-1){
+            int l=0;
+            int c=0;
+            if (s.charAt(h)=='('){
+                String s1="";
+                c++;
+                for (int i=h+1;i<s.length();i++){
+                    if (s.charAt(i)=='('){
+                        c++;
+                    }
+                    else if(s.charAt(i)==')'){
+                        c--;
+                    }
+                    l=i;
+                    if (c==0){
+                        break;
+                    }
+                    s1+=s.charAt(i);
+                }
+                olaviat p=new olaviat(s1);
+                p.last();
+                this.s=this.s.replace(this.s.substring(h,l+1),p.GetS());
+                h=-1;
+            }
+            h++;
+        }
+
+
+
+
         while(h<s.length() && s.indexOf('!')!=-1){
             int f=0;
             int l =0;
@@ -97,14 +128,14 @@ public class olaviat {
         while(h<s.length() && s.indexOf('x')!=-1 || h<s.length() && s.indexOf('/')!=-1 || h<s.length() && s.indexOf('%')!=-1){
             int z=0;
             int c=0;
-            if (s.charAt(h)=='x' || s.charAt(h)=='/'){
+            if (s.charAt(h)=='x' || s.charAt(h)=='/' || s.charAt(h)=='%'){
                 String s1="";
                 String s2="";
                 for (int j=h-1 ; j>=0;j--){
                     if(this.s.charAt(j)<'0' || this.s.charAt(j)>'9'){
                         break;
                     }
-                    s1=s.charAt(j)+s2;
+                    s1=s.charAt(j)+s1;
                     z=j;
                 }
                 for (int j=h+1;j<s.length();j++){

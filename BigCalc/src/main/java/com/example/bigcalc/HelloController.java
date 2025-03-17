@@ -70,35 +70,53 @@ public class HelloController {
     }
     @FXML
     public void pressSum() {
-       if(s.charAt(s.length()-1)!='^' && s.charAt(s.length()-1)!='+' && s.charAt(s.length()-1)!='-'){
-        s+='+';
-        showMon.setText(s);
+       if (s.isEmpty()){
+           showMon.setText("error , enter a number");
+       }
+       else {
+           if( (s.charAt(s.length()-1)>='0' && s.charAt(s.length()-1)<='9') ||(s.charAt(s.length()-1)!='^' && s.charAt(s.length()-1)!='+' && s.charAt(s.length()-1)!='-') ){
+               s+='+';
+               showMon.setText(s);
+           }
        }
     }
     @FXML
     public void pressMinus() {
-        if(s.charAt(s.length()-1)!='^' && s.charAt(s.length()-1)!='+' && s.charAt(s.length()-1)!='-'){
-            s+='+';
-            showMon.setText(s);
+        if (s.isEmpty()){
+            showMon.setText("error , enter a number");
+        }
+        else {
+            if( (s.charAt(s.length()-1)>='0' && s.charAt(s.length()-1)<='9') ||(s.charAt(s.length()-1)!='^' && s.charAt(s.length()-1)!='+' && s.charAt(s.length()-1)!='-') ){
+                s+='-';
+                showMon.setText(s);
+            }
         }
     }
     @FXML
     public void pressX() {
-        if(s.charAt(s.length()-1)!='x'){
-            if(s.charAt(s.length()-1)=='+' || s.charAt(s.length()-1)=='-' || s.charAt(s.length()-1)>=0 || s.charAt(s.length()-1)<=9 || s.charAt(s.length()-1)=='x'){
+        if (s.isEmpty()){
+            showMon.setText("error , enter a number");
+        }
+        else {
+            if (s.charAt(s.length()-1)!='^' && s.charAt(s.length()-1)!='x' && s.charAt(s.length()-1)!='/' && s.charAt(s.length()-1)!='%' && s.charAt(s.length()-1)!='!' ){
                 s+='x';
                 showMon.setText(s);
             }
         }
+
     }
     @FXML
     public void pressDiv() {
-        if(s.charAt(s.length()-1)!='/'){
-            if(s.charAt(s.length()-1)=='+' || s.charAt(s.length()-1)=='-' || s.charAt(s.length()-1)>=0 || s.charAt(s.length()-1)<=9 || s.charAt(s.length()-1)=='/'){
+        if (s.isEmpty()){
+            showMon.setText("error , enter a number");
+        }
+        else {
+            if (s.charAt(s.length()-1)!='^' && s.charAt(s.length()-1)!='x' && s.charAt(s.length()-1)!='/' && s.charAt(s.length()-1)!='%' && s.charAt(s.length()-1)!='!' ){
                 s+='/';
                 showMon.setText(s);
             }
         }
+
     }
     @FXML
     public void pressC() {
@@ -107,18 +125,43 @@ public class HelloController {
     }
     @FXML
     public void pressPow() {
-        s+='^';
-        showMon.setText(s);
+        if (s.isEmpty()){
+            showMon.setText("error , enter a number");
+        }
+        else {
+            if ((s.charAt(s.length()-1)=='!') ||(s.charAt(s.length()-1)>='0' && s.charAt(s.length()-1)<='9')){
+                s+='^';
+                showMon.setText(s);
+            }
+        }
     }
     @FXML
     public void pressFact() {
-        s+='!';
-        showMon.setText(s);
+
+        if (s.isEmpty()){
+            showMon.setText("error , enter a number");
+        }
+        else{
+            if((s.charAt(s.length()-1)=='!')||(s.charAt(s.length()-1)>='0' && s.charAt(s.length()-1)<='9') ){
+                s+='!';
+                showMon.setText(s);
+            }
+        }
+
     }
     @FXML
     protected void pressMod() {
-        s+='%';
-        showMon.setText(s);
+
+        if (s.isEmpty()){
+            showMon.setText("error , enter a number");
+        }
+        else {
+            if (s.charAt(s.length()-1)!='^' && s.charAt(s.length()-1)!='x' && s.charAt(s.length()-1)!='/' && s.charAt(s.length()-1)!='%' && s.charAt(s.length()-1)!='!' ){
+                s+='%';
+                showMon.setText(s);
+            }
+        }
+
     }
     @FXML
     public void pressDel() {
@@ -131,7 +174,11 @@ public class HelloController {
     }
     @FXML
     public void pressH() throws FileNotFoundException {
+<<<<<<< HEAD
          File f1= new File("C:\\Users\\arshia\\Desktop\\java t\\data.txt");// write file address for import n and matris
+=======
+         File f1= new File("/home/arshia/Desktop/asli2/data.txt");// write file address for import n and matris
+>>>>>>> 42f020d71ae36e0a08d77245a1596b8730eb57d5
         Scanner sc = new Scanner(f1);
 
 
@@ -159,6 +206,7 @@ public class HelloController {
     }
     @FXML
     public void pressE() throws FileNotFoundException {
+<<<<<<< HEAD
         File f2= new File("");//write file address here
         Scanner sc = new Scanner(f2);
         String Ress[]=new String[100000];
@@ -172,6 +220,9 @@ public class HelloController {
 
 
         File f1= new File(""); //write file address here
+=======
+        File f1= new File("/home/arshia/Desktop/asli2/data.txt"); //write file address here
+>>>>>>> 42f020d71ae36e0a08d77245a1596b8730eb57d5
         PrintWriter outfill1= new PrintWriter(f1);
         String s2=s;
         olaviat a=new olaviat(s);
