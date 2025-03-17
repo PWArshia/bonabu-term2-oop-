@@ -1,6 +1,7 @@
 package com.example.bigcalc;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -129,11 +130,11 @@ public class HelloController {
         showMon.setText(s);
     }
     @FXML
-    public void pressH() {
-         File f1= new File("");// write file address for import n and matris
+    public void pressH() throws FileNotFoundException {
+         File f1= new File("C:\\Users\\arshia\\Desktop\\java t\\data.txt");// write file address for import n and matris
         Scanner sc = new Scanner(f1);
 
-        
+
         while(sc.hasNext()){
             s=sc.nextLine();
             showMon.setText(s);
@@ -143,10 +144,11 @@ public class HelloController {
     }
     @FXML
     public void pressCE() {
-        int z=s.length();
+        int z=s.length()-1;
         int c=0;
         while(s.charAt(z)>='0' && s.charAt(z)<='9') {
             c++;
+            z--;
         }
         String s2="";
         for (int i=0;i<s.length()-c;i++) {
@@ -156,13 +158,28 @@ public class HelloController {
         showMon.setText(s);
     }
     @FXML
-    public void pressE() {
+    public void pressE() throws FileNotFoundException {
+        File f2= new File("");//write file address here
+        Scanner sc = new Scanner(f2);
+        String Ress[]=new String[100000];
+        int temp=0;
+        while(sc.hasNext()){
+            Ress[temp]=sc.nextLine();
+            temp++;
+        }
+        sc.close();
+
+
+
         File f1= new File(""); //write file address here
         PrintWriter outfill1= new PrintWriter(f1);
         String s2=s;
         olaviat a=new olaviat(s);
         a.last();
         showMon.setText(a.GetS());
+        for (int i=0;i<temp+1;i++) {
+            outfill1.println(Ress[i]);
+        }
         outfill1.println(s2+"="+a.GetS());
         outfill1.close();
     }
