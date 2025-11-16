@@ -2,13 +2,13 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        BigInt A = new BigInt("5");
-        BigInt B = new BigInt("13");
-        BigInt C = new BigInt(5);
-        C.SetFact(C);
-        System.out.println(C.length());
-        for (int x=0; x<C.length(); x++) {
-            System.out.print(C.Get()[x]);
-        }
+        BigDouble a = new BigDouble();
+        a.Set("12.1");
+        BigDouble b = new BigDouble();
+        b.Set("121.1");
+        BigDouble c = new BigDouble();
+        c.SetSum(a,b);
+        System.out.println(c.Get());
+
     }
 }

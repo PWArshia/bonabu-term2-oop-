@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="310.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bigcalc.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="310.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bigcalc.HelloController">
    <children>
       <Button fx:id="btMod" layoutX="37.0" layoutY="146.0" mnemonicParsing="false" onAction="#pressMod" prefHeight="31.0" prefWidth="33.0" text="\%" />
       <Button fx:id="btce" layoutX="108.0" layoutY="146.0" mnemonicParsing="false" onAction="#pressCE" prefHeight="31.0" prefWidth="33.0" text="CE" />
@@ -27,7 +26,9 @@
       <Button fx:id="btpow" layoutX="176.0" layoutY="360.0" mnemonicParsing="false" onAction="#pressPow" prefHeight="31.0" prefWidth="42.0" text="pow" />
       <Button fx:id="bth" layoutX="243.0" layoutY="360.0" mnemonicParsing="false" onAction="#pressH" prefHeight="31.0" prefWidth="33.0" text="H" />
       <TextArea fx:id="showMon" editable="false" layoutX="35.0" layoutY="6.0" prefHeight="127.0" prefWidth="240.0" wrapText="true" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="6.0" />
-      <Button fx:id="btnE" layoutX="92.0" layoutY="397.0" mnemonicParsing="false" onAction="#pressE" prefHeight="31.0" prefWidth="33.0" text="=" />
-      <Button fx:id="btn0" layoutX="164.0" layoutY="397.0" mnemonicParsing="false" onAction="#press0" prefHeight="31.0" prefWidth="33.0" text="0" />
+      <Button fx:id="btnE" layoutX="37.0" layoutY="397.0" mnemonicParsing="false" onAction="#pressE" prefHeight="31.0" prefWidth="33.0" text="=" />
+      <Button fx:id="btn0" layoutX="108.0" layoutY="397.0" mnemonicParsing="false" onAction="#press0" prefHeight="31.0" prefWidth="33.0" text="0" />
+      <Button fx:id="btR" layoutX="243.0" layoutY="397.0" mnemonicParsing="false" onAction="#pressR" prefHeight="31.0" prefWidth="33.0" text=")" />
+      <Button fx:id="btL" layoutX="181.0" layoutY="397.0" mnemonicParsing="false" onAction="#pressL" prefHeight="31.0" prefWidth="33.0" text="(" />
    </children>
 </AnchorPane>

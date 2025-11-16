@@ -1,3 +1,5 @@
+package Tools;
+
 public class BigInt {
 
     private int A[];
@@ -72,7 +74,7 @@ public class BigInt {
 
     public String GetString(){
         String s="";
-        for (int i=0; i<this.length(); i++) {
+        for (int i=0; i<A.length; i++) {
             s+=A[i];
         }
         return s;

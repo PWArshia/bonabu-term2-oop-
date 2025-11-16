@@ -1,6 +1,6 @@
-package com.example.bigcalc;
+package Tools;
 
-public class olaviat {
+public class olaviat1 {
 
 
     private String s;
@@ -8,11 +8,11 @@ public class olaviat {
 
     //   --------------------------------------> CONSTRUCTORS
 
-    public olaviat() {
+    public olaviat1() {
         this.s ="";
     }
 
-    public olaviat(String s) {
+    public olaviat1(String s) {
         this.s = s;
     }
 
@@ -53,7 +53,7 @@ public class olaviat {
                     }
                     s1+=s.charAt(i);
                 }
-                olaviat p=new olaviat(s1);
+                olaviat1 p=new olaviat1(s1);
                 p.last();
                 this.s=this.s.replace(this.s.substring(h,l+1),p.GetS());
                 h=-1;
